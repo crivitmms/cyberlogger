@@ -11,14 +11,14 @@ namespace cyberlogger
     class FileFormatter : public Iformatter
     {
         public:
-        std::string format(const LogEntry *logEntry) const override
+        std::string format(const LogEntry &logEntry) const override
         {
             return fmt::format("[{}][{}][{}/{}] {}\n",
-                               logEntry->timestamp,
-                               logEntry->logLevel->getLogLevelString(),
-                               logEntry->fileName,
-                               logEntry->sourceLine,
-                               logEntry->message);
+                               logEntry.timestamp,
+                               logEntry.logLevel->getLogLevelString(),
+                               logEntry.fileName,
+                               logEntry.sourceLine,
+                               logEntry.message);
         }
     };
 }

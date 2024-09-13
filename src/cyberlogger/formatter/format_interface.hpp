@@ -10,7 +10,7 @@ namespace cyberlogger
     class Iformatter {
     public:
         virtual ~Iformatter() = default;
-        virtual std::string format(const LogEntry *logEntry) const = 0;
+        virtual std::string format(const LogEntry &logEntry) const = 0;
     };
 
 }   // namespace cyberlogger

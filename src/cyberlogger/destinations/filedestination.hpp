@@ -30,7 +30,7 @@ namespace cyberlogger
         {
             openFile();
         }
-        void printLog(const LogEntry *logEntry) override
+        void printLog(const LogEntry &logEntry) override
         {
             stream << destformatter->format(logEntry);
         }

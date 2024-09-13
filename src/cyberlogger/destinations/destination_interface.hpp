@@ -28,7 +28,7 @@ namespace cyberlogger
         }
 
         // check if loglevel is in list
-        virtual void printLog(const LogEntry *logEntry) = 0;
+        virtual void printLog(const LogEntry &logEntry) = 0;
         virtual ~ILogDestination() = default;
     };
 }   // namespace cyberlogger

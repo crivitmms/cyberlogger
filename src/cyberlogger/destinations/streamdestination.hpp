@@ -19,7 +19,7 @@ namespace cyberlogger
             _stream(stream)
         {
         }
-        void printLog(const LogEntry *logEntry) override
+        void printLog(const LogEntry &logEntry) override
         {
             *_stream << destformatter->format(logEntry);
         }
