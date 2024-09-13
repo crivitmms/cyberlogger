@@ -22,7 +22,9 @@ namespace cyberlogger
             logLevel(std::move(level)),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line) {};
+            sourceLine(line)
+        {
+        }
 
         template <typename T, typename = std::enable_if_t<std::is_base_of_v<ILogLevel, T>>>
         LogEntry(std::string_view msg, T &level, std::string_view file = "", int line = -1) :
@@ -30,7 +32,9 @@ namespace cyberlogger
             logLevel(std::make_unique<T>(level)),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line){};
+            sourceLine(line)
+        {
+        }
 
         template <typename T, typename = std::enable_if_t<std::is_base_of_v<ILogLevel, T>>>
         LogEntry(std::string_view msg, T &&level, std::string_view file = "", int line = -1) :
@@ -38,7 +42,9 @@ namespace cyberlogger
             logLevel(std::make_unique<T>(std::move(level))),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line){};
+            sourceLine(line)
+        {
+        }
 
         LogEntry(LogEntry &&other) noexcept :
             message(std::move(other.message)),

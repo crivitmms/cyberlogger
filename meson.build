@@ -5,6 +5,7 @@ project(
         'warning_level=3',
         'werror=true',
         'default_library=static',
+        'cpp_std=c++20'
     ],
 )
 
@@ -17,8 +18,15 @@ fmt_dep = fmt_proj.get_variable('fmt_dep')
 
 subdir('src/cyberlogger')
 
+cyber_logger = library(
+    'cyberLogger',
+    src_files,
+    dependencies: fmt_dep,
+)
+
 cyberlogger_inc = include_directories('src', is_system: true)
 cyberlogger_dep = declare_dependency(
+    link_with: cyber_logger,
     include_directories: cyberlogger_inc,
     compile_args: cpp_args,
     dependencies: fmt_dep

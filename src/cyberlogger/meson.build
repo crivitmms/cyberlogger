@@ -1,6 +1,7 @@
 
 
-# subdir('formatter')
-# subdir('loglevel')
-# subdir('logger')
-# subdir('util')
+src_files += files(
+    'logger/logger.cpp',
+    'queue/queue.cpp',
+    'loglevel/loglevel.cpp'
+    )

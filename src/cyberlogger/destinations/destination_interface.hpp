@@ -12,9 +12,9 @@ namespace cyberlogger
     class ILogDestination
     {
     protected:
-        std::string destname;
-        std::vector<int> destLoglevelList;
         std::unique_ptr<Iformatter> destformatter;
+        std::vector<int> destLoglevelList;
+        std::string destname;
 
     public:
         ILogDestination(const std::string_view &name, const std::vector<int> &loglevels, std::unique_ptr<Iformatter> formatter) :

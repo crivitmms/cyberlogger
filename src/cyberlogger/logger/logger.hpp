@@ -10,55 +10,29 @@
 namespace cyberlogger
 {
 
-    class logger
+    class Logger
     {
         Queue queue;
         bool threaded = false;
+        std::vector<std::unique_ptr<ILogDestination>> logdestinations;
 
-    private:
-        void print(const LogEntry &entry)
-        {
-            for (const auto &dest : logdestinations)
-            {
-                dest->printLog(entry);
-            }
-        }
-
-        void add(LogEntry &entry)
-        {
-            if (threaded)
-            {
-                queue.addQueue(entry);
-            }
-            else
-            {
-                print(entry);
-            }
-        }
+        void print(const LogEntry &entry);
+        void add(LogEntry &entry);
 
     public:
-        std::vector<std::unique_ptr<cyberlogger::ILogDestination>> logdestinations;
+        void startThread();
+        void stopThread();
 
-        void startThread()
-        {
-            threaded = true;
-            queue.startThread(std::bind(&logger::print, this, std::placeholders::_1));
-        }
-        void stopThread()
-        {
-            threaded = false;
-            queue.stopThread();
-        }
+        void log(LogEntry &entry);
+        void log(LogEntry &&entry);
 
-        void log(LogEntry &entry)
+        void addLogDestination(std::unique_ptr<ILogDestination> &&destination);
+
+        template <typename DestinationType, typename... Args, typename = std::enable_if_t<std::is_base_of_v<ILogDestination, DestinationType>>>
+        void emplaceLogDestination(Args &&...args)
         {
-            print(entry);
-        };
-        void log(LogEntry &&entry)
-        {
-            print(entry);
-        };
-        logger() {};
+            logdestinations.emplace_back(std::make_unique<DestinationType>(std::forward<Args>(args)...));
+        }
     };
 }   // namespace cyberlogger
 
