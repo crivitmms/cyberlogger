@@ -1,0 +1,11 @@
+
+filedestination handle file logic (rotation/max size/zip...)
+
+queue system 
+thread system
+
+
+
+
+
+
