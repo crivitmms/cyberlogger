@@ -22,9 +22,7 @@ namespace cyberlogger
         long unsigned int notifyThreshold;
         std::function<void(LogEntry &logEntry)> _printFunction = []([[maybe_unused]] LogEntry &logEntry) {
         };
-
         void threadTask(std::stop_token stopToken);
-
     public:
         static constexpr std::chrono::milliseconds DEFAULT_WAIT_TIME{100};
 

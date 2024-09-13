@@ -5,7 +5,6 @@ project(
         'warning_level=3',
         'werror=true',
         'default_library=static',
-        'cpp_std=c++20'
     ],
 )
 
@@ -22,6 +21,7 @@ cyber_logger = library(
     'cyberLogger',
     src_files,
     dependencies: fmt_dep,
+    cpp_args : '-std=c++23'
 )
 
 cyberlogger_inc = include_directories('src', is_system: true)

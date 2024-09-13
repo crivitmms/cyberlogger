@@ -1,10 +1,7 @@
 
 filedestination handle file logic (rotation/max size/zip...)
 
-queue system 
-thread system
-
-
+create my own jthread for c++17???
 
 
 
