@@ -41,11 +41,11 @@ namespace cyberlogger
 
     void Logger::log(LogEntry &entry)
     {
-        print(entry);
+        add(entry);
     };
     void Logger::log(LogEntry &&entry)
     {
-        print(entry);
+        add(entry);
     };
 
     void Logger::addLogDestination(std::unique_ptr<cyberlogger::ILogDestination> &&destination)

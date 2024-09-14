@@ -12,9 +12,9 @@ namespace cyberlogger
 
     class Logger
     {
+        std::vector<std::unique_ptr<ILogDestination>> logdestinations;
         Queue queue;
         bool threaded = false;
-        std::vector<std::unique_ptr<ILogDestination>> logdestinations;
 
         void print(const LogEntry &entry);
         void add(LogEntry &entry);

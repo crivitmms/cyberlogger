@@ -23,19 +23,29 @@ namespace cyberlogger
 
             for (auto &entry : entries)
             {
+                if (!entry.logLevel)
+                {
+                    continue;
+                }
                 _printFunction(entry);
             }
         }
         while (!logs.empty())
         {
-            _printFunction(logs.front());
+            auto entry = std::move(logs.front());
             logs.pop();
+            if (!entry.logLevel)
+            {
+                continue;
+            }
+            _printFunction(entry);
         }
     };
 
     void Queue::startThread(const std::function<void(LogEntry &logEntry)> &printFunction, long unsigned int threshold,
                             std::chrono::milliseconds waittime)
     {
+
         stopThread();
         waitTimeout = waittime;
         notifyThreshold = threshold;

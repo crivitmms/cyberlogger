@@ -22,6 +22,7 @@ TEST_CASE("test ground") {
     {
         auto l = Logger();
 
+        l.stopThread();
         l.startThread();
 
         auto x = LogEntryDefault("hej", Loglevel::ERROR);
@@ -37,8 +38,8 @@ TEST_CASE("test ground") {
             std::make_unique<StreamDestination>("test3", std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
 
         auto fd = std::make_unique<FileDestination>("file", "./test.txt");
-        sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
-        fd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
+        // sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
+        // fd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
 
         l.addLogDestination(std::move(sd));
         l.addLogDestination(std::move(sd3));

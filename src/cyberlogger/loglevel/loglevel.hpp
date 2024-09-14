@@ -9,8 +9,8 @@ namespace cyberlogger
     class Loglevel : public ILogLevel
     {
         static constexpr int LEVELID = 0;
-    public:
 
+    public:
         static constexpr int UNKNOWN = 0;
         static constexpr int TRACE = 1;
         static constexpr int DEBUG = 2;

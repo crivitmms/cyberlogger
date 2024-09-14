@@ -4,5 +4,6 @@
 #include "logger/logger.hpp"
 #include "destinations/filedestination.hpp"
 #include "destinations/streamdestination.hpp"
+#include "loglevel/loglevel.hpp"
 
 #endif // __CYBERLOGGER_H__
