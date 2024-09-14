@@ -1,4 +1,4 @@
-test_files = files('test.cpp')
+test_files = files('test.cpp', 'logger_test.cpp')
 
 # CyberLogger_test_17 = executable(
 #     'CyberLogger_test_17',

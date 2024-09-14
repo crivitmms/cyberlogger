@@ -34,6 +34,11 @@ namespace cyberlogger
         queue.stopThread();
     }
 
+    bool Logger::isThreaded()
+    {
+        return threaded;
+    }
+
     void Logger::log(LogEntry &entry)
     {
         print(entry);
@@ -48,5 +53,14 @@ namespace cyberlogger
         logdestinations.push_back(std::move(destination));
     }
 
+    int Logger::getLogDestinationCount() const
+    {
+        return logdestinations.size();
+    }
+
+    void Logger::removeLogDestination(const std::string_view name)
+    {
+        std::erase_if(logdestinations, [name](const std::unique_ptr<cyberlogger::ILogDestination> &dest) { return name == dest->getName(); });
+    }
 
 }   // namespace cyberlogger

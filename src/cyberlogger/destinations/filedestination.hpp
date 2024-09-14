@@ -24,15 +24,22 @@ namespace cyberlogger
         }
 
     public:
-        FileDestination(const std::string_view &name, const std::vector<int> &loglevels, const std::filesystem::path &filePath) :
-            ILogDestination(name, loglevels, std::make_unique<FileFormatter>()),
+        FileDestination(const std::string_view &name, const std::filesystem::path &filePath) :
+            ILogDestination(name, std::make_unique<FileFormatter>()),
             filename(filePath)
         {
             openFile();
         }
         void printLog(const LogEntry &logEntry) override
         {
-            stream << destformatter->format(logEntry);
+            auto it = supportedLevels.find(logEntry.logLevel->getLogLevelID());
+            if(it != supportedLevels.end())
+            {
+                if(it->second.count(logEntry.logLevel->getLogLevel()) > 0)
+                {
+                    stream << destformatter->format(logEntry);
+                }
+            }
         }
         ~FileDestination()
         {

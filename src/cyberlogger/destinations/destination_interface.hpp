@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <memory>
+#include <set>
+#include <unordered_map>
 #include <vector>
 
 namespace cyberlogger
@@ -12,19 +14,29 @@ namespace cyberlogger
     class ILogDestination
     {
     protected:
+        std::unordered_map<int, std::set<int>> supportedLevels;
         std::unique_ptr<Iformatter> destformatter;
-        std::vector<int> destLoglevelList;
         std::string destname;
 
     public:
-        ILogDestination(const std::string_view &name, const std::vector<int> &loglevels, std::unique_ptr<Iformatter> formatter) :
+        ILogDestination(const std::string_view &name, std::unique_ptr<Iformatter> formatter) :
             destformatter(std::move(formatter)),
-            destLoglevelList(std::move(loglevels)),
             destname(name) {};
 
         std::string_view getName() const
         {
             return destname;
+        }
+        void addSupportedLevel(int logLevelId, int level)
+        {
+            supportedLevels[logLevelId].insert(level);
+        }
+        void addSupportedLevel(int logLevelId, std::vector<int> levels)
+        {
+            for (auto &&level : levels)
+            {
+                supportedLevels[logLevelId].insert(level);
+            }
         }
 
         // check if loglevel is in list

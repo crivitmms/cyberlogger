@@ -1,3 +1,5 @@
+#include "catch2/catch_test_macros.hpp"
+
 
 #include "cyberlogger/loglevel/loglevel.hpp"
 
@@ -16,26 +18,27 @@
 
 using namespace cyberlogger;
 
-int main(/*int args, char ** */)
-{
+TEST_CASE("test ground") {
     {
         auto l = Logger();
 
         l.startThread();
 
-        auto x = LogEntryDefault("hej", Loglevel::Level::ERROR);
+        auto x = LogEntryDefault("hej", Loglevel::ERROR);
 
         auto os = std::make_shared<std::ostringstream>();
         auto os2 = std::make_unique<std::ostringstream>();
 
-        auto iptr = LogEntry("hej", Loglevel(Loglevel::Level::ERROR));
+        auto iptr = LogEntry("hej", Loglevel(Loglevel::ERROR));
 
-        l.emplaceLogDestination<StreamDestination>("test", std::vector<int>{0, 1, 2}, std::move(os2));
-        auto sd = std::make_unique<StreamDestination>("test2", std::vector<int>{0, 1, 2}, os);
+        l.emplaceLogDestination<StreamDestination>("test", std::move(os2));
+        auto sd = std::make_unique<StreamDestination>("test2", os);
         auto sd3 =
-            std::make_unique<StreamDestination>("test3", std::vector<int>{0, 1, 2}, std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
+            std::make_unique<StreamDestination>("test3", std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
 
-        auto fd = std::make_unique<FileDestination>("file", std::vector<int>{0, 1, 2}, "./test.txt");
+        auto fd = std::make_unique<FileDestination>("file", "./test.txt");
+        sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
+        fd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
 
         l.addLogDestination(std::move(sd));
         l.addLogDestination(std::move(sd3));
@@ -44,13 +47,13 @@ int main(/*int args, char ** */)
         for (size_t i = 0; i < 2; i++)
         {
 
-            l.log(LogEntryDefault("hej0", Loglevel::Level::UNKNOWN));
-            l.log(LogEntryDefault("hej1", Loglevel::Level::TRACE));
-            l.log(LogEntryDefault("hej2", Loglevel::Level::DEBUG));
-            l.log(LogEntryDefault("hej3", Loglevel::Level::INFO));
-            l.log(LogEntryDefault("hej4", Loglevel::Level::WARNING));
+            l.log(LogEntryDefault("hej0", Loglevel::UNKNOWN));
+            l.log(LogEntryDefault("hej1", Loglevel::TRACE));
+            l.log(LogEntryDefault("hej2", Loglevel::DEBUG));
+            l.log(LogEntryDefault("hej3", Loglevel::INFO));
+            l.log(LogEntryDefault("hej4", Loglevel::WARNING));
             l.log(x);
-            l.log(LogEntryDefault("hej10", Loglevel::Level::CRITICAL));
+            l.log(LogEntryDefault("hej10", Loglevel::CRITICAL));
             l.log(LogEntryDefault("hej10", 10));
 
             l.log(iptr);
@@ -59,6 +62,4 @@ int main(/*int args, char ** */)
         std::string osstring = os->str();
         std::cout << osstring;
     }
-
-    return 0;
 }

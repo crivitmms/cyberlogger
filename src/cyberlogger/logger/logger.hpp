@@ -22,6 +22,7 @@ namespace cyberlogger
     public:
         void startThread();
         void stopThread();
+        bool isThreaded();
 
         void log(LogEntry &entry);
         void log(LogEntry &&entry);
@@ -33,6 +34,9 @@ namespace cyberlogger
         {
             logdestinations.emplace_back(std::make_unique<DestinationType>(std::forward<Args>(args)...));
         }
+
+        int getLogDestinationCount() const;
+        void removeLogDestination(const std::string_view name);
     };
 }   // namespace cyberlogger
 

@@ -2,6 +2,8 @@
 #define __CONSOLEFORMATTER_H__
 
 #include "format_interface.hpp"
+#include "../loglevel/loglevel_colours.hpp"
+
 
 #include "fmt/chrono.h"
 #include "fmt/format.h"
