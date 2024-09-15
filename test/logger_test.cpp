@@ -95,5 +95,26 @@ TEST_CASE("Threaded logging")
         REQUIRE(logstring.find(msg2) != std::string::npos);
 
         REQUIRE(logstring.find(msg1) < logstring.find(msg2));
+
+
+        SECTION("ownership of log")
+        {
+            logger.startThread();
+            oss->clear();
+            auto log = cyberlogger::LogEntry(msg1, cyberlogger::Loglevel(cyberlogger::Loglevel::ERROR));
+
+            for (size_t i = 0; i < 5; i++)
+            {
+                logger.log(log);
+            }
+
+            logstring = oss->str();
+
+            auto pos = logstring.find(msg1);
+            REQUIRE(pos != std::string::npos);
+            pos += 1;
+            pos = logstring.find(msg1, pos);
+            REQUIRE(pos == std::string::npos);
+        }
     }
 }
