@@ -52,6 +52,9 @@ TEST_CASE("Threaded logging")
     destination->addSupportedLevel(cyberlogger::Loglevel::getID(), {cyberlogger::Loglevel::UNKNOWN, cyberlogger::Loglevel::ERROR});
     logger.addLogDestination(std::move(destination));
 
+    auto msg1 = "test message 1";
+    auto msg2 = "test message 2";
+
     SECTION("Start/Stop threading")
     {
         logger.startThread();
@@ -60,17 +63,31 @@ TEST_CASE("Threaded logging")
         REQUIRE(logger.isThreaded() == false);
     }
 
+    SECTION("logs")
+    {
+        logger.log(cyberlogger::LogEntry(msg1, cyberlogger::Loglevel(cyberlogger::Loglevel::UNKNOWN)));
+        logger.log(cyberlogger::LogEntry(msg2, cyberlogger::Loglevel(cyberlogger::Loglevel::ERROR)));
+
+        std::string logstring = oss->str();
+
+        REQUIRE(logstring.find(msg1) != std::string::npos);
+        REQUIRE(logstring.find(msg2) != std::string::npos);
+
+        REQUIRE(logstring.find(msg1) < logstring.find(msg2));
+    }
+
     SECTION("log threading")
     {
         logger.startThread();
 
-        auto msg1 = "test message 1";
-        auto msg2 = "test message 2";
+        REQUIRE(logger.isThreaded() == true);
 
         logger.log(cyberlogger::LogEntry(msg1, cyberlogger::Loglevel(cyberlogger::Loglevel::UNKNOWN)));
         logger.log(cyberlogger::LogEntry(msg2, cyberlogger::Loglevel(cyberlogger::Loglevel::ERROR)));
 
         logger.stopThread();
+
+        REQUIRE(logger.isThreaded() == false);
 
         std::string logstring = oss->str();
 
