@@ -37,6 +37,8 @@ namespace cyberlogger
 
         int getLogDestinationCount() const;
         void removeLogDestination(const std::string_view name);
+
+        ~Logger();
     };
 }   // namespace cyberlogger
 

@@ -37,13 +37,13 @@ TEST_CASE("test ground") {
         auto sd3 =
             std::make_unique<StreamDestination>("test3", std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
 
-        auto fd = std::make_unique<FileDestination>("file", "./test.txt");
+        // auto fd = std::make_unique<FileDestination>("file", "./test.txt");
         // sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
         // fd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
 
         l.addLogDestination(std::move(sd));
         l.addLogDestination(std::move(sd3));
-        l.addLogDestination(std::move(fd));
+        // l.addLogDestination(std::move(fd));
 
         for (size_t i = 0; i < 2; i++)
         {

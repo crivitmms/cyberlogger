@@ -63,4 +63,9 @@ namespace cyberlogger
         std::erase_if(logdestinations, [name](const std::unique_ptr<cyberlogger::ILogDestination> &dest) { return name == dest->getName(); });
     }
 
+    Logger::~Logger()
+    {
+        stopThread();
+    }
+
 }   // namespace cyberlogger

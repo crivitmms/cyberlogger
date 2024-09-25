@@ -99,8 +99,31 @@ TEST_CASE("Threaded logging")
 
         SECTION("ownership of log")
         {
+            oss->str("");
+            auto log = cyberlogger::LogEntry(msg1, cyberlogger::Loglevel(cyberlogger::Loglevel::ERROR));
+
+            for (size_t i = 0; i < 5; i++)
+            {
+                logger.log(log);
+            }
+
+            logstring = oss->str();
+
+            size_t pos = 0;
+            for (size_t i = 0; i < 5; i++)
+            {
+                pos = logstring.find(msg1, pos);
+                REQUIRE(pos != std::string::npos);
+                pos += 1;
+            }
+
+            pos = logstring.find(msg1, pos);
+            REQUIRE(pos == std::string::npos);
+        }
+        SECTION("ownership of log thread")
+        {
+            oss->str("");
             logger.startThread();
-            oss->clear();
             auto log = cyberlogger::LogEntry(msg1, cyberlogger::Loglevel(cyberlogger::Loglevel::ERROR));
 
             for (size_t i = 0; i < 5; i++)
