@@ -131,6 +131,8 @@ TEST_CASE("Threaded logging")
                 logger.log(log);
             }
 
+            logger.stopThread();
+
             logstring = oss->str();
 
             auto pos = logstring.find(msg1);

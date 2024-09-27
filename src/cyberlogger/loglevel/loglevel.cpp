@@ -2,6 +2,21 @@
 
 namespace cyberlogger
 {
+    bool Loglevel::printDebugdata() const
+    {
+        switch (_loglevel)
+        {
+        case UNKNOWN: return false;
+        case TRACE: return true;
+        case DEBUG: return true;
+        case INFO: return false;
+        case WARNING: return false;
+        case ERROR: return false;
+        case CRITICAL: return false;
+        default: return false;
+        }
+    }
+
     std::string_view Loglevel::getLogLevelString() const
     {
         switch (_loglevel)

@@ -1,10 +1,12 @@
 #include "queue.hpp"
 
+#include "../util/threadname.hpp"
 namespace cyberlogger
 {
 
     void Queue::threadTask(std::stop_token stopToken)
     {
+        SetThreadName("Print Thread");
         while (!stopToken.stop_requested())
         {
             std::unique_lock<std::mutex> lock(mutex);

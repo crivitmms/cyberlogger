@@ -23,6 +23,8 @@ namespace cyberlogger
         void startThread();
         void stopThread();
         bool isThreaded();
+        void setMainThreadName(std::string name);
+        std::string getMainThreadName();
 
         void log(LogEntry &entry);
         void log(LogEntry &&entry);

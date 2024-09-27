@@ -1,4 +1,5 @@
 #include "logger.hpp"
+#include "../util/threadname.hpp"
 
 namespace cyberlogger
 {
@@ -37,6 +38,16 @@ namespace cyberlogger
     bool Logger::isThreaded()
     {
         return threaded;
+    }
+
+    void Logger::setMainThreadName(std::string name)
+    {
+        SetThreadName(name);
+    }
+
+    std::string Logger::getMainThreadName()
+    {
+        return GetThreadName();
     }
 
     void Logger::log(LogEntry &entry)

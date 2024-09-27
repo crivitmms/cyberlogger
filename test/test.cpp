@@ -36,6 +36,7 @@ TEST_CASE("test ground") {
         auto sd = std::make_unique<StreamDestination>("test2", os);
         auto sd3 =
             std::make_unique<StreamDestination>("test3", std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
+        sd3->addSupportedLevel(Loglevel::getID(),{1,2,3,4,5,6,7,8,9});
 
         // auto fd = std::make_unique<FileDestination>("file", "./test.txt");
         // sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
@@ -62,5 +63,15 @@ TEST_CASE("test ground") {
 
         std::string osstring = os->str();
         std::cout << osstring;
+
+
+        std::jthread([&]{
+            SetThreadName("SHIT Thread");
+            l.log(LogEntryDefault("from thread", Loglevel::INFO));
+        });
+
+
+
+        
     }
 }

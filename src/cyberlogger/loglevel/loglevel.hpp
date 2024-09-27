@@ -22,8 +22,9 @@ namespace cyberlogger
         Loglevel(const int loglevel) :
             ILogLevel(loglevel) {};
 
-        std::string_view getLogLevelString() const override;
+        bool printDebugdata() const override;
 
+        std::string_view getLogLevelString() const override;
         std::string_view getLogLevelColourString() const override;
         static int getID();
         int getLogLevelID() const override;

@@ -2,9 +2,9 @@
 #define __LOGENTRY_H__
 
 #include "../loglevel/loglevel_interface.hpp"
+#include "../util/threadname.hpp"
 
 #include "memory"
-
 #include "chrono"
 
 namespace cyberlogger
@@ -16,13 +16,15 @@ namespace cyberlogger
         std::chrono::system_clock::time_point timestamp;
         std::string fileName;
         int sourceLine;
+        std::string threadName;
 
         LogEntry(std::string_view msg, std::unique_ptr<ILogLevel> &&level, std::string_view file = "", int line = -1) :
             message(msg),
             logLevel(std::move(level)),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line)
+            sourceLine(line),
+            threadName(ThreadName())
         {
         }
 
@@ -32,7 +34,8 @@ namespace cyberlogger
             logLevel(std::make_unique<T>(level)),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line)
+            sourceLine(line),
+            threadName(ThreadName())
         {
         }
 
@@ -42,7 +45,8 @@ namespace cyberlogger
             logLevel(std::make_unique<T>(std::move(level))),
             timestamp(std::chrono::system_clock::now()),
             fileName(file),
-            sourceLine(line)
+            sourceLine(line),
+            threadName(ThreadName())
         {
         }
 
@@ -51,7 +55,8 @@ namespace cyberlogger
             logLevel(std::move(other.logLevel)),
             timestamp(std::move(other.timestamp)),
             fileName(std::move(other.fileName)),
-            sourceLine(other.sourceLine)
+            sourceLine(other.sourceLine),
+            threadName(std::move(other.threadName))
         {
         }
 
@@ -60,6 +65,12 @@ namespace cyberlogger
 
         ~LogEntry()
         {
+        }
+
+        private:
+        std::string ThreadName()
+        {
+            return GetThreadName();
         }
     };
 

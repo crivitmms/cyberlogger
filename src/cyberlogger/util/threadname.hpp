@@ -13,7 +13,7 @@
 
 #include <string>
 
-inline void SetThreadName(const std::wstring &threadName)
+inline void SetThreadName(const std::string &threadName)
 {
 #ifdef _WIN32
     // Windows

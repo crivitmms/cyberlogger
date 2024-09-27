@@ -19,6 +19,7 @@ namespace cyberlogger
         {
             return _loglevel;
         };
+        virtual bool printDebugdata() const = 0;
         virtual std::string_view getLogLevelString() const = 0;
         virtual std::string_view getLogLevelColourString() const = 0;
         virtual int getLogLevelID() const = 0;
