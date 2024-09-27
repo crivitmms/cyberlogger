@@ -33,7 +33,6 @@ namespace cyberlogger
                                    logEntry.message);
             }
         }
-    }
-};
-}
+    };
+}   // namespace cyberlogger
 #endif   // __FILEFORMATTER_H__
