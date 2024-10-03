@@ -15,12 +15,17 @@ cpp_args = []
 fmt_proj = subproject('fmt', default_options: ['warning_level=3', 'werror=false'])
 fmt_dep = fmt_proj.get_variable('fmt_dep')
 
+convertx = subproject('convertx')
+convertx_dep = convertx.get_variable('convertx_dep')
+
+dependencies = [fmt_dep, convertx_dep]
+
 subdir('src/cyberlogger')
 
 cyber_logger = library(
     'cyberLogger',
     src_files,
-    dependencies: fmt_dep,
+    dependencies: dependencies,
     cpp_args : '-std=c++23'
 )
 
@@ -29,7 +34,7 @@ cyberlogger_dep = declare_dependency(
     link_with: cyber_logger,
     include_directories: cyberlogger_inc,
     compile_args: cpp_args,
-    dependencies: fmt_dep
+    dependencies: dependencies
 )
 
 

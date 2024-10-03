@@ -25,11 +25,10 @@ namespace cyberlogger
             }
             else
             {
-                return fmt::format("[{}][{}][{}:{}] {}\n",
+                return fmt::format("[{}][{:8}][{:15}] {}\n",
                                    logEntry.timestamp,
                                    logEntry.logLevel->getLogLevelString(),
-                                   logEntry.fileName,
-                                   logEntry.sourceLine,
+                                   logEntry.threadName,
                                    logEntry.message);
             }
         }
