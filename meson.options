@@ -1,1 +1,5 @@
 option('build_test_targets', type : 'boolean', value : false)
+
+option('no_singleton_instance', type : 'boolean', value : false)
+
+option('no_default_macros', type : 'boolean', value : false)

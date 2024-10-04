@@ -12,6 +12,15 @@ src_files = []
 header_only = []
 cpp_args = []
 
+if get_option('no_singleton_instance')
+    cpp_args += '-DNO_DEFAULT_SINGLETON'
+    add_project_arguments(cpp_args, language: 'cpp')
+endif
+if get_option('no_default_macros')
+    cpp_args += '-DNO_DEFAULT_MACROS'
+    add_project_arguments(cpp_args, language: 'cpp')
+endif
+
 fmt_proj = subproject('fmt', default_options: ['warning_level=3', 'werror=false'])
 fmt_dep = fmt_proj.get_variable('fmt_dep')
 

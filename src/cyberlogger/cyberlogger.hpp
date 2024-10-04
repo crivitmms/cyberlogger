@@ -1,9 +1,16 @@
 #ifndef __CYBERLOGGER_H__
 #define __CYBERLOGGER_H__
 
-#include "logger/logger.hpp"
 #include "destinations/filedestination.hpp"
 #include "destinations/streamdestination.hpp"
+#include "logger/logger.hpp"
 #include "loglevel/loglevel.hpp"
 
-#endif // __CYBERLOGGER_H__
+#ifndef NO_DEFAULT_SINGLETON
+#include "util/singletonwrap.hpp"
+#endif
+#ifndef NO_DEFAULT_MACROS
+#include "logs/easy_logentry.hpp"
+#endif
+
+#endif   // __CYBERLOGGER_H__

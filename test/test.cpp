@@ -3,7 +3,7 @@
 
 #include "cyberlogger/loglevel/loglevel.hpp"
 
-#include "cyberlogger/logs/easy_logentry.hpp"
+#include "cyberlogger/cyberlogger.hpp"
 #include "cyberlogger/logs/logentry.hpp"
 
 #include "cyberlogger/logger/logger.hpp"
@@ -20,10 +20,11 @@ using namespace cyberlogger;
 
 TEST_CASE("test ground") {
     {
-        auto l = Logger();
+        // auto l = Logger();
+        auto l = LOGGER;
 
-        l.stopThread();
-        l.startThread();
+        l->stopThread();
+        l->startThread();
 
         auto x = LogEntryDefault("hej", Loglevel::ERROR);
 
@@ -32,7 +33,7 @@ TEST_CASE("test ground") {
 
         auto iptr = LogEntry("hej", Loglevel(Loglevel::ERROR));
 
-        l.emplaceLogDestination<StreamDestination>("test", std::move(os2));
+        l->emplaceLogDestination<StreamDestination>("test", std::move(os2));
         auto sd = std::make_unique<StreamDestination>("test2", os);
         auto sd3 =
             std::make_unique<StreamDestination>("test3", std::shared_ptr<std::ostream>(&std::cout, [](std::ostream *) {}));
@@ -43,23 +44,25 @@ TEST_CASE("test ground") {
         // sd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
         // fd->addSupportedLevel(Loglevel::getID(), {Loglevel::UNKNOWN, Loglevel::ERROR });
 
-        l.addLogDestination(std::move(sd));
-        l.addLogDestination(std::move(sd3));
+        l->addLogDestination(std::move(sd));
+        l->addLogDestination(std::move(sd3));
         // l.addLogDestination(std::move(fd));
 
         for (size_t i = 0; i < 100; i++)
         {
 
-            l.log(LogEntryDefault("hej0", Loglevel::UNKNOWN));
-            l.log(LogEntryDefault("hej1", Loglevel::TRACE));
-            l.log(LogEntryDefault("hej2", Loglevel::DEBUG));
-            l.log(LogEntryDefault("hej3", Loglevel::INFO));
-            l.log(LogEntryDefault("hej4", Loglevel::WARNING));
-            l.log(x);
-            l.log(LogEntryDefault("hej10", Loglevel::CRITICAL));
-            l.log(LogEntryDefault("hej10", 10));
+            l->log(LogEntryDefault("hej0", Loglevel::UNKNOWN));
+            l->log(LogEntryDefault("hej1", Loglevel::TRACE));
+            l->log(LogEntryDefault("hej2", Loglevel::DEBUG));
+            l->log(LogEntryDefault("hej3", Loglevel::INFO));
+            l->log(LogEntryDefault("hej4", Loglevel::WARNING));
+            l->log(x);
+            l->log(LogEntryDefault("hej10", Loglevel::CRITICAL));
+            l->log(LogEntryDefault("hej10", 10));
 
-            l.log(iptr);
+            LOG_DEBUG("easy test log");
+
+            l->log(iptr);
         }
 
         std::string osstring = os->str();
@@ -68,7 +71,7 @@ TEST_CASE("test ground") {
 
         std::jthread([&]{
             SetThreadName("SHIT Thread");
-            l.log(LogEntryDefault("from thread", Loglevel::DEBUG));
+            l->log(LogEntryDefault("from thread", Loglevel::DEBUG));
         });
 
 
