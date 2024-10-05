@@ -1,5 +1,5 @@
-#ifndef __LOGLEVELPROVIDER_H__
-#define __LOGLEVELPROVIDER_H__
+#pragma once
+
 
 #include "loglevel_colours.hpp"
 #include "loglevel_interface.hpp"
@@ -30,5 +30,3 @@ namespace cyberlogger
         int getLogLevelID() const override;
     };
 }   // namespace cyberlogger
-
-#endif   // __LOGLEVELPROVIDER_H__

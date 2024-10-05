@@ -1,5 +1,4 @@
-#ifndef __DESTINATION_INTERFACE_H__
-#define __DESTINATION_INTERFACE_H__
+#pragma once
 
 #include "../formatter/format_interface.hpp"
 
@@ -44,5 +43,3 @@ namespace cyberlogger
         virtual ~ILogDestination() = default;
     };
 }   // namespace cyberlogger
-
-#endif   // __DESTINATION_INTERFACE_H__

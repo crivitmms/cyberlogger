@@ -1,5 +1,4 @@
-#ifndef __FORMAT_INTERFACE_H__
-#define __FORMAT_INTERFACE_H__
+#pragma once
 
 #include "string"
 
@@ -14,5 +13,3 @@ namespace cyberlogger
     };
 
 }   // namespace cyberlogger
-
-#endif   // __FORMAT_INTERFACE_H__

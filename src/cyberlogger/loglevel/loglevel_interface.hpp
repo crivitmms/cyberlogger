@@ -1,5 +1,5 @@
-#ifndef __LOGLEVEL_INTERFACE_H__
-#define __LOGLEVEL_INTERFACE_H__
+#pragma once
+
 
 #include "iostream"
 #include "string"
@@ -26,4 +26,3 @@ namespace cyberlogger
     };
 }   // namespace cyberlogger
 
-#endif   // __LOGLEVEL_INTERFACE_H__

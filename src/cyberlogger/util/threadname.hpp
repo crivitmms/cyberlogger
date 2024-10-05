@@ -1,5 +1,4 @@
-#ifndef __THREADNAME_H__
-#define __THREADNAME_H__
+#pragma once
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -60,4 +59,3 @@ inline std::string GetThreadName()
     return threadName;
 }
 
-#endif   // __THREADNAME_H__

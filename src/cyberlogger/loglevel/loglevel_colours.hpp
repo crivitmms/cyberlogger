@@ -1,5 +1,4 @@
-#ifndef __LOGLEVEL_COLOURS_H__
-#define __LOGLEVEL_COLOURS_H__
+#pragma once
 
 #include "string"
 
@@ -16,5 +15,3 @@ namespace cyberlogger
     inline constexpr const std::string_view COLOUR_CRITICAL = "\033[35m";   // Magenta color for CRITICAL
 
 }   // namespace cyberlogger
-
-#endif   // __LOGLEVEL_COLOURS_H__

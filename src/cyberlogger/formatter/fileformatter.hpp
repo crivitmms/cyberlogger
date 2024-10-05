@@ -1,5 +1,4 @@
-#ifndef __FILEFORMATTER_H__
-#define __FILEFORMATTER_H__
+#pragma once
 
 #include "format_interface.hpp"
 
@@ -34,4 +33,3 @@ namespace cyberlogger
         }
     };
 }   // namespace cyberlogger
-#endif   // __FILEFORMATTER_H__

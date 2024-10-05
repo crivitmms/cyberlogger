@@ -1,5 +1,4 @@
-#ifndef __CONSOLEDESTINATION_H__
-#define __CONSOLEDESTINATION_H__
+#pragma once
 
 #include "../formatter/consoleformatter.hpp"
 #include "destination_interface.hpp"
@@ -22,9 +21,9 @@ namespace cyberlogger
         void printLog(const LogEntry &logEntry) override
         {
             auto it = supportedLevels.find(logEntry.logLevel->getLogLevelID());
-            if(it != supportedLevels.end())
+            if (it != supportedLevels.end())
             {
-                if(it->second.count(logEntry.logLevel->getLogLevel()) > 0)
+                if (it->second.count(logEntry.logLevel->getLogLevel()) > 0)
                 {
                     *_stream << destformatter->format(logEntry);
                 }
@@ -32,5 +31,3 @@ namespace cyberlogger
         }
     };
 }   // namespace cyberlogger
-
-#endif   // __CONSOLEDESTINATION_H__

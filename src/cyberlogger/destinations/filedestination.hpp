@@ -1,5 +1,4 @@
-#ifndef __FILEDESTINATION_H__
-#define __FILEDESTINATION_H__
+#pragma once
 
 #include "../formatter/fileformatter.hpp"
 #include "destination_interface.hpp"
@@ -33,7 +32,7 @@ namespace cyberlogger
 
         void cleanArchives(const std::filesystem::path &newArchive)
         {
-            if(!std::filesystem::exists(archivelogger))
+            if (!std::filesystem::exists(archivelogger))
             {
                 std::fstream(archivelogger, std::ios::out);
             }
@@ -173,5 +172,3 @@ namespace cyberlogger
         }
     };
 }   // namespace cyberlogger
-
-#endif   // __FILEDESTINATION_H__

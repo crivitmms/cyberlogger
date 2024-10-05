@@ -1,5 +1,4 @@
-#ifndef __SINGLETONWRAP_H__
-#define __SINGLETONWRAP_H__
+#pragma once
 
 namespace cyberlogger
 {
@@ -19,4 +18,3 @@ namespace cyberlogger
 
 }   // namespace cyberlogger
 
-#endif   // __SINGLETONWRAP_H__

@@ -1,5 +1,4 @@
-#ifndef __QUEUE_H__
-#define __QUEUE_H__
+#pragma once
 
 #include "../logs/logentry.hpp"
 
@@ -35,4 +34,3 @@ namespace cyberlogger
     };
 }   // namespace cyberlogger
 
-#endif   // __QUEUE_H__

@@ -1,5 +1,4 @@
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#pragma once
 
 #include "../destinations/destination_interface.hpp"
 #include "../queue/queue.hpp"
@@ -43,5 +42,3 @@ namespace cyberlogger
         ~Logger();
     };
 }   // namespace cyberlogger
-
-#endif   // __LOGGER_H__

@@ -1,5 +1,4 @@
-#ifndef __LOGENTRY_H__
-#define __LOGENTRY_H__
+#pragma once
 
 #include "../loglevel/loglevel_interface.hpp"
 #include "../util/threadname.hpp"
@@ -76,4 +75,4 @@ namespace cyberlogger
 
 }   // namespace cyberlogger
 
-#endif   // __LOGENTRY_H__
+

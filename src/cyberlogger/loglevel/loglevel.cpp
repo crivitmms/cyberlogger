@@ -28,7 +28,7 @@ namespace cyberlogger
         case WARNING: return "WARNING";
         case ERROR: return "ERROR";
         case CRITICAL: return "CRITICAL";
-        default: return "UNKNOWN";
+        default: return "?LEVEL?";
         }
     };
 

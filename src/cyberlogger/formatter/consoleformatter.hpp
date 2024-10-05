@@ -1,5 +1,4 @@
-#ifndef __CONSOLEFORMATTER_H__
-#define __CONSOLEFORMATTER_H__
+#pragma once
 
 #include "../loglevel/loglevel_colours.hpp"
 #include "format_interface.hpp"
@@ -39,5 +38,3 @@ namespace cyberlogger
         }
     };
 }   // namespace cyberlogger
-
-#endif   // __CONSOLEFORMATTER_H__
